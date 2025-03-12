@@ -12,3 +12,4 @@ export 'service/di_service.dart';
 export 'helper/sharedpreference_helper.dart';
 export 'helper/string_format.dart';
 export 'utils/utils.dart';
+export 'utils/local_config.dart';

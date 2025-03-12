@@ -48,9 +48,9 @@ class Badges extends StatelessWidget {
         badgeStyle: badges.BadgeStyle(
           shape: badges.BadgeShape.circle,
           badgeColor: Colors.red,
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(4),
           borderRadius: BorderRadius.circular(4),
-          borderSide: BorderSide(color: Colors.white, width: 2),
+          // borderSide: BorderSide(color: Colors.white, width: 2),
           elevation: 0,
         ),
         child: Icon(
