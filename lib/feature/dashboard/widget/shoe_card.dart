@@ -67,42 +67,43 @@ class ShoeCard extends StatelessWidget {
           Positioned(
             top: 0,
             left: 18,
-            child: Container(
-              height: 40,
-              width: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(6),
-                  bottomRight: Radius.circular(6),
+            child: GestureDetector(
+              onTap: () => fav(),
+              child: Container(
+                height: 40,
+                width: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(6),
+                    bottomRight: Radius.circular(6),
+                  ),
+                  color: Colors.blueAccent,
                 ),
-                color: Colors.blueAccent,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: GestureDetector(
-                    onTap: () => fav(),
-                    child: Icon(
-                      Icons.favorite,
-                      color: favColor,
-                    )),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Icon(
+                    Icons.favorite,
+                    color: favColor,
+                  ),
+                ),
               ),
             ),
           ),
           Positioned(
             bottom: 0,
             right: 18,
-            child: Container(
-              height: 40,
-              width: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(6),
-                  topRight: Radius.circular(6),
+            child: GestureDetector(
+              onTap: () => add(),
+              child: Container(
+                height: 40,
+                width: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6),
+                    topRight: Radius.circular(6),
+                  ),
+                  color: Colors.blueAccent,
                 ),
-                color: Colors.blueAccent,
-              ),
-              child: GestureDetector(
-                onTap: () => add(),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Icon(

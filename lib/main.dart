@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/feature/feature.dart';
 import '/core/service/di_service.dart' as services;
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

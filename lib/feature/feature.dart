@@ -10,3 +10,5 @@ export 'order/order.dart';
 export 'payment/payment.dart';
 export 'restaurant/restaurant.dart';
 export 'splash/splash.dart';
+export 'cart/cart.dart';
+export 'account/account.dart';

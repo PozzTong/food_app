@@ -14,9 +14,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   final List<Widget> _screens = [
     DashboardScreen(),
-    Test(),
+    FavoriteScreen(),
     ChartScreen(),
-    Center(child: Text('Account Screen')),
+    AccountScreen(),
   ];
 
   void _onItemTapped(int index) {

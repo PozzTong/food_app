@@ -14,4 +14,6 @@ class SharedPreferenceHelper {
   static const String languageCode = 'language_code';
   static const String languageKey = 'language-key';
   static const String languageListKey = 'language-list-key';
+  static const String cart ='cart';
+  static const String favCart='favorite_products';
 }
