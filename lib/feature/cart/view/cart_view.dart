@@ -38,7 +38,6 @@ class CartPage extends StatelessWidget {
                                   children: [
                                     Text("Price: \$${cart.product.price}"),
                                     Text('Instock: ${cart.product.stock}'),
-                                    // Text('Remain ${cartController.products}')
                                   ],
                                 ),
                               ),
@@ -63,7 +62,6 @@ class CartPage extends StatelessWidget {
                                     ),
                                     Container(
                                       alignment: Alignment.center,
-                                      // color: Colors.amber,
                                       height: 40,
                                       width: 50,
                                       child: Center(
@@ -87,7 +85,7 @@ class CartPage extends StatelessWidget {
                                             int? newQty = int.tryParse(value);
                                             if (newQty != null && newQty >= 0) {
                                               cartController.updateProductQty(
-                                                  productlist[index], newQty);
+                                                  cart.product, newQty);
                                             }
                                           },
                                         ),
@@ -136,6 +134,9 @@ class CartPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (cartController.cartItems.isNotEmpty) {
+                        Future.delayed(Duration(seconds: 1), () {
+                          Get.back();
+                        });
                         Get.snackbar(
                           "Order Placed",
                           "Your order has been placed successfully!",
@@ -143,9 +144,13 @@ class CartPage extends StatelessWidget {
                           backgroundColor: Colors.green,
                           colorText: Colors.white,
                         );
+
                         cartController.cartItems.clear();
-                        // cartController.saveCart();
+                        cartController.saveCart();
+
+                        // Wait a moment before navigating back
                       } else {
+                        Get.back();
                         Get.snackbar(
                           "Cart Empty",
                           "Add items to your cart before proceeding.",

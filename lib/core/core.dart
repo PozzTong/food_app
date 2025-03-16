@@ -12,3 +12,5 @@ export 'service/di_service.dart';
 export 'helper/sharedpreference_helper.dart';
 export 'helper/string_format.dart';
 export 'utils/utils.dart';
+export'utils/indicator.dart';
+export 'utils/custom_loader.dart';

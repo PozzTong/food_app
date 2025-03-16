@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 
-// import '../../common/common.dart';
+import '../../common/common.dart';
 
 class ColorResources {
   static const Color primaryColor = Color(0xff1e293b);
@@ -77,9 +77,9 @@ class ColorResources {
     return primaryColor;
   }
 
-  // static Color getScreenBgColor() {
-  //   return Get.find<ThemeController>().darkTheme ? cardColorDark : cardColor;
-  // }
+  static Color getScreenBgColor() {
+    return Get.find<ThemeController>().darkTheme ? cardColorDark : cardColor;
+  }
 
   static Color projectStatusColor(String state) {
     Color color = ColorResources.blueColor;
@@ -432,17 +432,17 @@ class ColorResources {
     return colorRed;
   }
 
-  // static Color getUnselectedIconColor() {
-  //   return Get.find<ThemeController>().darkTheme
-  //       ? colorWhite
-  //       : colorGrey.withValues(alpha: 0.6);
-  // }
+  static Color getUnselectedIconColor() {
+    return Get.find<ThemeController>().darkTheme
+        ? colorWhite
+        : colorGrey.withValues(alpha: 0.6);
+  }
 
-  // static Color getSelectedIconColor() {
-  //   return Get.find<ThemeController>().darkTheme
-  //       ? getTextColor()
-  //       : getTextColor();
-  // }
+  static Color getSelectedIconColor() {
+    return Get.find<ThemeController>().darkTheme
+        ? getTextColor()
+        : getTextColor();
+  }
 
   // transparent color
   static Color getTransparentColor() {

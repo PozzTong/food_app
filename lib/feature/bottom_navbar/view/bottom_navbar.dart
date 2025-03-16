@@ -89,17 +89,3 @@ class _BottomNavbarState extends State<BottomNavbar> {
   }
 }
 
-class Test extends StatelessWidget {
-  const Test({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-}

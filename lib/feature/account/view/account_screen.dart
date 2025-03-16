@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common.dart';
+import '../../../core/core.dart';
 import '../../feature.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -30,47 +31,11 @@ class _AccountScreenState extends State<AccountScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: size.height / 6,
-                      margin: EdgeInsets.only(top: 5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.amber,
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/image/profile.png',
-                          ),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 10,
-                            right: 25,
-                            child: Container(
-                              height: 30,
-                              width: 30, // Ensure it has equal width and height
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.grey,
-                              ),
-                              child: IconButton(
-                                padding:
-                                    EdgeInsets.zero, // Remove extra padding
-                                constraints:
-                                    BoxConstraints(), // Prevent extra space
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.camera_alt_outlined,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: ProfileImage(
+                      size: size,
+                      image: 'assets/image/profile.png',
+                      tap: () {},
+                      color: Colors.amber,
                     ),
                   ),
                   Expanded(
@@ -82,7 +47,9 @@ class _AccountScreenState extends State<AccountScreen> {
                           subtitle: Text('Email'),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(RouteHelper.editProfile);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.pink,
                             shape: RoundedRectangleBorder(
@@ -148,8 +115,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           Get.back();
                           Get.find<DashboardController>().logout();
                         },
-                        title: 'LocalStrings.logout.tr',
-                        subTitle: 'LocalStrings.logoutSureWarningMSg.tr',
+                        title: LocalStrings.logout.tr,
+                        subTitle: LocalStrings.logoutSureWarningMSg.tr,
                       );
                     },
                   ),

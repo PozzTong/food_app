@@ -21,6 +21,7 @@ class ApiClient extends GetxService {
     try {
       if (method == Method.postMethod) {
         if (passHeader) {
+          initToken();
           response = await http.post(
             url,
             body: params,
@@ -36,6 +37,7 @@ class ApiClient extends GetxService {
           );
         }
       } else if (method == Method.putMethod) {
+        initToken();
         response = await http.put(
           url,
           body: params,
@@ -46,6 +48,7 @@ class ApiClient extends GetxService {
           },
         );
       } else if (method == Method.deleteMethod) {
+        initToken();
         response = await http.delete(
           url,
           headers: {
@@ -55,6 +58,7 @@ class ApiClient extends GetxService {
         );
       } else {
         if (passHeader) {
+          initToken();
           response = await http.get(url, headers: {
             'Accept': 'application/json',
             'Authorization': token,

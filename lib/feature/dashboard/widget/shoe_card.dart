@@ -10,6 +10,9 @@ class ShoeCard extends StatelessWidget {
     required this.fav,
     required this.addColor,
     required this.favColor,
+    required this.tag1,
+    required this.hero,
+    required this.tag2,
   });
   final String ass;
   final String title;
@@ -18,104 +21,126 @@ class ShoeCard extends StatelessWidget {
   final Function() fav;
   final Color addColor;
   final Color favColor;
+  final Object tag1;
+  final Object tag2;
+
+  final VoidCallback hero;
 
   // final
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 3 - 30,
-      width: MediaQuery.of(context).size.width / 2,
-      margin: EdgeInsets.only(top: 40),
-      // padding: EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.amber,
-      ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            top: -70,
-            left: 50,
-            right: 1,
-            child: Image.asset(
-              ass,
-              width: 200,
-              height: 200,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Positioned(
-            right: 5,
-            left: 2,
-            bottom: 6,
-            child: ListTile(
-              title: Text(title),
-              subtitle: Text(subtitle),
-              titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-              subtitleTextStyle: TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 18,
-            child: GestureDetector(
-              onTap: () => fav(),
-              child: Container(
-                height: 40,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(6),
-                    bottomRight: Radius.circular(6),
-                  ),
-                  color: Colors.blueAccent,
+    return GestureDetector(
+      onTap: () => hero(),
+      child: Container(
+        height: MediaQuery.of(context).size.height / 3 - 30,
+        width: MediaQuery.of(context).size.width / 2,
+        margin: EdgeInsets.only(top: 40),
+        // padding: EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.amber,
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              top: -70,
+              left: 50,
+              right: 1,
+              child: Hero(
+                tag: tag1,
+                child: Image.asset(
+                  ass,
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.contain,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Icon(
-                    Icons.favorite,
-                    color: favColor,
+              ),
+            ),
+            Positioned(
+              right: 5,
+              left: 2,
+              bottom: 6,
+              child: ListTile(
+                title: Hero(
+                  tag:
+                      tag2, // Make sure this is unique and consistent between screens
+                  child: Material(
+                    color: Colors
+                        .transparent, // Avoid background color interfering with animation
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                subtitle: Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 18,
-            child: GestureDetector(
-              onTap: () => add(),
-              child: Container(
-                height: 40,
-                width: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(6),
-                    topRight: Radius.circular(6),
+            Positioned(
+              top: 0,
+              left: 18,
+              child: GestureDetector(
+                onTap: () => fav(),
+                child: Container(
+                  height: 40,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(6),
+                      bottomRight: Radius.circular(6),
+                    ),
+                    color: Colors.blueAccent,
                   ),
-                  color: Colors.blueAccent,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Icon(
-                    Icons.add,
-                    color: addColor,
-                    // size: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Icon(
+                      Icons.favorite,
+                      color: favColor,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+            Positioned(
+              bottom: 0,
+              right: 18,
+              child: GestureDetector(
+                onTap: () => add(),
+                child: Container(
+                  height: 40,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(6),
+                      topRight: Radius.circular(6),
+                    ),
+                    color: Colors.blueAccent,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Icon(
+                      Icons.add,
+                      color: addColor,
+                      // size: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

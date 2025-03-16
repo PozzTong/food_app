@@ -11,9 +11,10 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => sharedPreferences, fenix: true);
   Get.lazyPut(() => ApiClient(sharedPreferences: Get.find()));
   Get.lazyPut(() => SplashRepo(apiClient: Get.find()));
-  Get.lazyPut(()=> LocalizationController(sharedPreferences: Get.find()));
-  Get.lazyPut(()=> SplashController(apiClient: Get.find(), localizationController: Get.find()));
-  Get.lazyPut(() => CartController(apiClient: Get.find()));
+  Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
+  Get.lazyPut(() => SplashController(
+      apiClient: Get.find(), localizationController: Get.find()));
+  Get.lazyPut(() => CartController(apiClient: Get.find()), fenix: true);
   // Get.lazyPut(()=> ThemeController(sharedPreferences: Get.find()));
 
   Map<String, Map<String, String>> language = {};
