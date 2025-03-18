@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:food_app/core/core.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,7 +23,7 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       appBar: AppBar(
         leading: BackLead(),
-        title: Text('Edit Profile'),
+        title: Text(LocalStrings.profile.tr),
         centerTitle: true,
         actions: [
           IconButton(
@@ -56,14 +56,14 @@ class _EditProfileState extends State<EditProfile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  text(text: 'Name'),
+                  text(text: LocalStrings.name.tr),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
                     child: CustomTextField(
                       labelText: '',
-                      hintText: 'Name',
+                      hintText: LocalStrings.name.tr,
                       // controller: controller.emailController,
                       onChanged: (value) {},
                       // focusNode: controller.emailFocusNode,
@@ -72,11 +72,11 @@ class _EditProfileState extends State<EditProfile> {
                       inputAction: TextInputAction.next,
                     ),
                   ),
-                  text(text: 'Email Address'),
+                  text(text: LocalStrings.email.tr),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: CustomTextField(
-                      hintText: 'Email Address',
+                      hintText: LocalStrings.email.tr,
                       textInputType: TextInputType.emailAddress,
                       inputAction: TextInputAction.next,
                       onChanged: (value) {},
@@ -94,7 +94,7 @@ class _EditProfileState extends State<EditProfile> {
                       inputAction: TextInputAction.next,
                     ),
                   ),
-                  text(text: 'Phone Number'),
+                  text(text: LocalStrings.phone.tr),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: CustomTextField(
@@ -104,13 +104,13 @@ class _EditProfileState extends State<EditProfile> {
                       onChanged: (value) {},
                     ),
                   ),
-                  text(text: 'Password'),
+                  text(text: LocalStrings.password.tr),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 16,
                     ),
                     child: CustomTextField(
-                      hintText: 'Password',
+                      hintText: LocalStrings.password.tr,
                       textInputType: TextInputType.multiline,
                       inputAction: TextInputAction.next,
                       isPassword: true,

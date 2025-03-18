@@ -7,6 +7,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 
+import '../../../common/common.dart';
+import '../../../core/core.dart';
+
 class LocationCreate extends StatefulWidget {
   const LocationCreate({super.key});
 
@@ -21,7 +24,7 @@ class _LocationCreateState extends State<LocationCreate> {
   BitmapDescriptor? selectedLocationIcon;
   final loc.Location location = loc.Location();
   final Completer<GoogleMapController> _mapController = Completer();
-  String _address = "Fetching address...";
+  String _address = "";
 
   @override
   void initState() {
@@ -34,14 +37,17 @@ class _LocationCreateState extends State<LocationCreate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackLead(),
         title: const Text('New Location'),
         centerTitle: true,
       ),
       body: Stack(
         children: [
           _currentLocation == null
-              ? const Center(child: CircularProgressIndicator())
+              ? CustomLoader()
               : GoogleMap(
+                  mapType: MapType.normal,
+                  // liteModeEnabled: true,//can't move on
                   zoomControlsEnabled: false,
                   onMapCreated: (GoogleMapController controller) async {
                     _mapController.complete(controller);
@@ -55,7 +61,8 @@ class _LocationCreateState extends State<LocationCreate> {
                     zoom: 20,
                   ),
                   markers: {
-                    if (_currentLocationMarker != null) _currentLocationMarker!,
+                    if (_currentLocationMarker != null)
+                      _currentLocationMarker!,
                     if (selectedLocationIcon != null &&
                         _currentLocation != null)
                       Marker(
@@ -79,14 +86,15 @@ class _LocationCreateState extends State<LocationCreate> {
                   },
                 ),
           Center(
-            child: Icon(
-              Icons.location_on,
-              color: Colors.red,
-              size: 50,
+            child: Image.asset(
+              'assets/image/pin_marker.png',
+              height: 50,
             ),
           ),
-          Positioned(
-            top: 20,
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.fastOutSlowIn,
+            top: _currentLocation != null ? 20 : -90,
             left: 20,
             right: 20,
             child: Container(
@@ -96,9 +104,7 @@ class _LocationCreateState extends State<LocationCreate> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                _currentLocation != null
-                    ? "Location: \n$_address"
-                    : "Fetching location...",
+                "Location: \n$_address",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
@@ -109,13 +115,27 @@ class _LocationCreateState extends State<LocationCreate> {
             ),
           ),
           Positioned(
-            bottom: 50,
-            right: 10,
-            child: FloatingActionButton(
-              onPressed: getLocation,
-              child: const Icon(Icons.my_location),
-            ),
-          ),
+              bottom: 40,
+              right: 10,
+              child: GestureDetector(
+                onTap: getLocation,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.my_location,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              )),
         ],
       ),
     );
@@ -136,7 +156,8 @@ class _LocationCreateState extends State<LocationCreate> {
         });
         _cameraToPosition(_currentLocation!);
         await _getAddressFromLatLng(
-            _currentLocation!); // Get the address after fetching the location
+          _currentLocation!,
+        ); // Get the address after fetching the location
       } else {
         debugPrint("Location is null");
       }
@@ -209,6 +230,7 @@ class _LocationCreateState extends State<LocationCreate> {
     return await location.getLocation();
   }
 
+// to fetch map
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _mapController.future;
     CameraPosition newCameraPosition = CameraPosition(target: pos, zoom: 20);
@@ -228,12 +250,6 @@ class _LocationCreateState extends State<LocationCreate> {
           _address =
               "${place.subThoroughfare ?? ''} ${place.street ?? ''}, ${place.locality ?? ''}, ${place.country ?? ''}"
                   .trim();
-
-          // _address =
-          // "${place.street ?? ''} ${place.subThoroughfare ?? ''}".trim();
-          // _address =
-          //     "${place.street ?? ''} ${place.subThoroughfare ?? ''}, ${place.locality ?? ''}, ${place.country ?? ''}"
-          //         .trim();
         });
       } else {
         setState(() {

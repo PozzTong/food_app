@@ -16,7 +16,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
     DashboardScreen(),
     FavoriteScreen(),
     ChartScreen(),
-    AccountScreen(),
+    AccountScreen(
+      
+    ),
   ];
 
   void _onItemTapped(int index) {

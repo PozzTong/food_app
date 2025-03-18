@@ -12,3 +12,4 @@ export 'restaurant/restaurant.dart';
 export 'splash/splash.dart';
 export 'cart/cart.dart';
 export 'account/account.dart';
+export 'languages/lang.dart';

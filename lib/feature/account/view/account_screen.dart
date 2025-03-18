@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/common.dart';
 import '../../../core/core.dart';
 import '../../feature.dart';
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key});
+  const AccountScreen({
+    super.key,
+  });
 
   @override
   State<AccountScreen> createState() => _AccountScreenState();
@@ -14,13 +18,14 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final controller = Get.put(DashboardController(dashboardRepo: Get.find()));
+  // late final DashboardModel homeModel;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
-        title: Text('My Profile'),
+        title: Text(LocalStrings.profile.tr),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.settings))],
       ),
       body: GetBuilder<DashboardController>(builder: (controller) {
@@ -43,8 +48,17 @@ class _AccountScreenState extends State<AccountScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
-                          title: Text('Your Name'),
-                          subtitle: Text('Email'),
+                          title: Text(
+                            '${controller.homeModel.staff!.firstName ?? ''} ${controller.homeModel.staff!.lastName ?? ''}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            controller.homeModel.staff!.email ?? '',
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -71,26 +85,46 @@ class _AccountScreenState extends State<AccountScreen> {
               Column(
                 children: [
                   iconCard(
-                    title: 'Favorit',
+                    title: 'Favorite',
                     icon: Icons.favorite,
                     tap: () {},
                     color: null,
                   ),
                   iconCard(
-                    title: 'Downloads',
-                    icon: Icons.file_open_outlined,
+                    title: LocalStrings.downloading.tr,
+                    icon: FontAwesomeIcons.download,
                     tap: () {},
                     color: null,
                   ),
                   iconCard(
-                    title: 'Language',
-                    icon: Icons.language,
-                    tap: () {},
+                    title: LocalStrings.language.tr,
+                    icon: FontAwesomeIcons.language,
+                    tap: () {
+                      final apiClient =
+                          Get.put(ApiClient(sharedPreferences: Get.find()));
+                      SharedPreferences pref = apiClient.sharedPreferences;
+                      String language = pref.getString(SharedPreferenceHelper
+                              .languageListKey) ?? // to save on shared preference
+                          '';
+                      String countryCode =
+                          pref.getString(SharedPreferenceHelper.countryCode) ??
+                              'US';
+                      String languageCode =
+                          pref.getString(SharedPreferenceHelper.languageCode) ??
+                              'en';
+                      Locale local = Locale(languageCode, countryCode);
+                      CustomBottomSheet(
+                        child: LanguageBottomSheetScreen(
+                          languageList: language,
+                          selectedLocal: local,
+                        ),
+                      ).customBottomSheet(context);
+                    },
                     color: null,
                   ),
                   iconCard(
                     title: "Locations",
-                    icon: Icons.pin_drop_outlined,
+                    icon: FontAwesomeIcons.mapLocation,
                     tap: () {
                       Get.toNamed(RouteHelper.location);
                     },
@@ -104,7 +138,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   ),
                   iconCard(
                     title: 'Clear Cashe',
-                    icon: Icons.delete,
+                    icon: Icons.delete_outline_rounded,
                     tap: () {},
                     color: null,
                   ),
@@ -115,7 +149,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     color: null,
                   ),
                   iconCard(
-                    title: "Log Out",
+                    title: LocalStrings.logout.tr,
                     icon: Icons.logout_sharp,
                     tap: () {
                       const WarningAlertDialog().warningAlertDialog(
