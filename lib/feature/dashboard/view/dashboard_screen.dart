@@ -77,7 +77,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     )
                   ],
                 ),
-                drawer: DrawerScreen(),
+                drawer: DrawerScreen(
+                  homeModel: controller.homeModel,
+                ),
                 body: controller.isLoading
                     ? CustomLoader()
                     : RefreshIndicator(
@@ -252,6 +254,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         double scale = 1.0 -
                                             ((page - index).abs() * 0.2)
                                                 .clamp(0.0, 0.2);
+                                        double rotationAngle =
+                                            (page - index) * 0.5;
                                         return TweenAnimationBuilder(
                                           tween: Tween<double>(
                                               begin: 1.0, end: scale),
@@ -274,6 +278,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       },
                                                     );
                                                   },
+                                                  angle: rotationAngle,
                                                   tag1: product.id,
                                                   ass: product.image,
                                                   title: product.name,

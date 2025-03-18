@@ -7,10 +7,13 @@ import '../../common.dart';
 class WarningAlertDialog {
   const WarningAlertDialog();
 
-  void warningAlertDialog(BuildContext context, VoidCallback press,
-      {String title = LocalStrings.logoutSureWarningMSg,
-      String subTitle = '',
-      String image = 'assets/image/code_clans_logo.png'}) {
+  void warningAlertDialog(
+    BuildContext context,
+    VoidCallback press, {
+    String title = LocalStrings.logoutSureWarningMSg,
+    String subTitle = '',
+    String image = 'assets/image/warning.png',
+  }) {
     showDialog(
       context: context,
       builder: (context) => Dialog(

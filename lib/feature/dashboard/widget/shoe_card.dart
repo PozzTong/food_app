@@ -12,7 +12,7 @@ class ShoeCard extends StatelessWidget {
     required this.favColor,
     required this.tag1,
     required this.hero,
-    required this.tag2,
+    required this.tag2, required this.angle,
   });
   final String ass;
   final String title;
@@ -23,6 +23,7 @@ class ShoeCard extends StatelessWidget {
   final Color favColor;
   final Object tag1;
   final Object tag2;
+  final double angle;
 
   final VoidCallback hero;
 
@@ -50,11 +51,14 @@ class ShoeCard extends StatelessWidget {
               right: 1,
               child: Hero(
                 tag: tag1,
-                child: Image.asset(
-                  ass,
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.contain,
+                child: Transform.rotate(
+                   angle:angle ,
+                  child: Image.asset(
+                    ass,
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),

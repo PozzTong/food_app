@@ -179,6 +179,9 @@ class _ShoeDetailState extends State<ShoeDetail> {
                             });
                           },
                           child: Card(
+                            color: _selectedIndex == index
+                                ? Colors.red
+                                : Colors.grey,
                             elevation: 5,
                             child: SizedBox(
                               height: 50,
@@ -189,7 +192,7 @@ class _ShoeDetailState extends State<ShoeDetail> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: _selectedIndex == index
-                                        ? Colors.deepPurple
+                                        ? Colors.white
                                         : colors,
                                   ),
                                 ),
@@ -201,7 +204,7 @@ class _ShoeDetailState extends State<ShoeDetail> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   Center(
                     child: SizedBox(

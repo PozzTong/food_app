@@ -8,6 +8,8 @@ class BackLead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
@@ -20,7 +22,7 @@ class BackLead extends StatelessWidget {
           width: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: Colors.pink.withOpacity(0.4),
+            color: Colors.pink.withOpacity(isDarkMode ? 0.4 : 0.8),
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 8),

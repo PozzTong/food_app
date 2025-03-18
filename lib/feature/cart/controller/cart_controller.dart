@@ -5,8 +5,8 @@ import '../../../core/core.dart';
 import '../../feature.dart';
 
 class CartController extends GetxController {
-   ApiClient apiClient;
-   CartController({required this.apiClient});
+  ApiClient apiClient;
+  CartController({required this.apiClient});
   var cartItems = <CartModel>[].obs;
 
   @override
@@ -18,7 +18,8 @@ class CartController extends GetxController {
 
   void loadCart() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String>? cartJson = preferences.getStringList(SharedPreferenceHelper.cart);
+    List<String>? cartJson =
+        preferences.getStringList(SharedPreferenceHelper.cart);
     if (cartJson != null) {
       cartItems.value =
           cartJson.map((item) => CartModel.fromJson(jsonDecode(item))).toList();
@@ -35,7 +36,8 @@ class CartController extends GetxController {
 
   void loadFav() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String>? storedFavorites = prefs.getStringList(SharedPreferenceHelper.favCart);
+    List<String>? storedFavorites =
+        prefs.getStringList(SharedPreferenceHelper.favCart);
     if (storedFavorites != null) {
       List<ProductModel> favoriteProducts = storedFavorites
           .map((product) => ProductModel.fromJson(jsonDecode(product)))
@@ -90,6 +92,16 @@ class CartController extends GetxController {
     saveCart();
     update();
   }
+  void removeonceFromCart(ProductModel product) {
+    int index = cartItems.indexWhere((item) => item.product.id == product.id);
+    if (index != -1) {
+      product.increaseStock(cartItems[index].quantity); // Restore full stock
+      cartItems.removeAt(index); // Remove product from cart
+    }
+    saveCart();
+    update();
+  }
+
 
   void onFavo(ProductModel product) async {
     product.toggleFavorite();
@@ -98,8 +110,13 @@ class CartController extends GetxController {
   }
 
   /// Get total price
-  double get totalPrice => cartItems.fold(
-      0, (sum, item) => sum + (item.product.price * item.quantity));
+  // double get totalPrice => cartItems.fold(
+  //     0, (sum, item) => sum + (item.product.price * item.quantity));
+ double getItemTotalPrice(ProductModel product) {
+  int index = cartItems.indexWhere((item) => item.product.id == product.id);
+  return index != -1 ? cartItems[index].product.price * cartItems[index].quantity : 0;
+}
+
 
   bool isInCart(ProductModel product) {
     return cartItems.any((p) => p.product.id == product.id);
@@ -128,5 +145,4 @@ class CartController extends GetxController {
   List<ProductModel> get favoriteProducts {
     return productlist.where((product) => product.isFavorite.value).toList();
   }
-
 }

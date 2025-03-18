@@ -14,6 +14,9 @@ class RouteHelper {
   static const String cartPage = "/cart_view";
   static const String editProfile = "/edit_profile";
   static const String shoeDetail = "/shoe_detail";
+  static const String checkOut = "/check_out";
+  static const String location= "/location_screen";
+  static const String createLocation="/location_create";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => SplashScreen()),
@@ -50,10 +53,13 @@ class RouteHelper {
     GetPage(
       name: shoeDetail,
       page: () => ShoeDetail(),
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.topLevel,
       transitionDuration: Duration(
         milliseconds: 300,
       ),
     ),
+    GetPage(name: checkOut, page: () => CheckOut()),
+    GetPage(name: location, page:()=> Location()),
+    GetPage(name: createLocation, page:()=>LocationCreate()),
   ];
 }

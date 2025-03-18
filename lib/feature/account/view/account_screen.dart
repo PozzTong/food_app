@@ -74,36 +74,45 @@ class _AccountScreenState extends State<AccountScreen> {
                     title: 'Favorit',
                     icon: Icons.favorite,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: 'Downloads',
                     icon: Icons.file_open_outlined,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: 'Language',
                     icon: Icons.language,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: "Locations",
                     icon: Icons.pin_drop_outlined,
-                    tap: () {},
+                    tap: () {
+                      Get.toNamed(RouteHelper.location);
+                    },
+                    color: null,
                   ),
                   iconCard(
                     title: 'Subscription',
                     icon: Icons.subtitles_sharp,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: 'Clear Cashe',
                     icon: Icons.delete,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: 'Clear History',
                     icon: Icons.access_time_rounded,
                     tap: () {},
+                    color: null,
                   ),
                   iconCard(
                     title: "Log Out",
@@ -119,6 +128,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         subTitle: LocalStrings.logoutSureWarningMSg.tr,
                       );
                     },
+                    color: Colors.red,
                   ),
                   SizedBox(
                     height: 70,
@@ -136,6 +146,7 @@ class _AccountScreenState extends State<AccountScreen> {
     required String title,
     required IconData icon,
     required Function tap,
+    required Color? color,
   }) {
     return GestureDetector(
       onTap: () => tap(),
@@ -147,7 +158,10 @@ class _AccountScreenState extends State<AccountScreen> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           child: ListTile(
             contentPadding: EdgeInsets.only(right: 8, left: 16),
-            leading: Icon(icon),
+            leading: Icon(
+              icon,
+              color: color,
+            ),
             title: Text(title),
             trailing: Icon(
               Icons.arrow_forward_ios,

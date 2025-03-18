@@ -23,8 +23,8 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height / 6,
-      width: size.width / 2,
+      height: size.width / 3,
+      width: size.width / 3,
       margin: EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -38,7 +38,8 @@ class ProfileImage extends StatelessWidget {
         children: [
           Positioned(
             bottom: 10,
-            right: 25,
+            right: 0,
+            left: size.width / 3 - 20,
             child: Container(
               height: 30,
               width: 30, // Ensure it has equal width and height
